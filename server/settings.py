@@ -172,3 +172,5 @@ CACHES = {
         }
     }
 }
+
+os.environ["SENTENCE_TRANSFORMERS_HOME"] = "./model/"

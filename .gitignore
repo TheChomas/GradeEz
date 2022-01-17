@@ -28,4 +28,4 @@ config/
 venv/
 cache/
 server/config.json
-illustrations-download/
+model/

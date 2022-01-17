@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.apiOverview, name="api-overview"),
+    path('', views.api_overview, name="api-overview"),
+    path('eval/', views.evaluate_questions, name="evaluate-answers"),
 ]
