@@ -4,6 +4,8 @@ from typing import List
 from sentence_transformers import SentenceTransformer, InputExample, losses, util
 from torch.utils.data import DataLoader
 
+from api.models import Passage
+
 
 def get_extractions(model, passage: str, questions: List[str], k=2) -> List[str]:
     '''
@@ -30,7 +32,7 @@ def get_extractions(model, passage: str, questions: List[str], k=2) -> List[str]
     return qs
 
 
-def fine_tune_model(model, passage: str):
+def fine_tune_model(model, passage: str, epochs=1):
     corpus = passage.replace(". ", ".").replace("\n", "").split(".")
 
     train_examples = [InputExample(texts=corpus, label=1.0)]
@@ -39,7 +41,21 @@ def fine_tune_model(model, passage: str):
     train_loss = losses.CosineSimilarityLoss(model)
 
     model.fit(train_objectives=[
-              (train_dataloader, train_loss)], epochs=1, warmup_steps=1)
+              (train_dataloader, train_loss)], epochs=epochs, warmup_steps=1)
+
+    return model
+
+
+def start_model():
+    model = SentenceTransformer('paraphrase-multilingual-mpnet-base-v2')
+
+    passages = Passage.objects.all()
+
+    passages = [passage.passage_text for passage in passages]
+
+    model = fine_tune_model(model, '.'.join(passages), epochs=2)
+
+    print("Model loaded\n")
 
     return model
 
