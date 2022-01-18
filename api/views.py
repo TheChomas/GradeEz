@@ -1,5 +1,4 @@
-from sentence_transformers import SentenceTransformer, InputExample, losses, util
-from torch.utils.data import DataLoader
+from sentence_transformers import SentenceTransformer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -17,15 +16,14 @@ print("Model loaded\n")
 @cache_page(cache_timeout)
 def api_overview(request):
     api_urls = {
-        'Overview': '/ GET',
-        'Evaluate passage': '/api/posts/',
+        'Overview': '/  GET',
+        'Evaluate passage': '/api/eval/  POST',
     }
 
     return Response(api_urls)
 
 
 @api_view(['POST'])
-@cache_page(cache_timeout)
 def evaluate_questions(request):
 
     passage = request.data['passage']
