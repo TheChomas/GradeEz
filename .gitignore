@@ -22,7 +22,6 @@ test_db/
 *.sublime-workspace
 media/*
 static/*
-db.sqlite3
 config/
 .idea/
 venv/
