@@ -61,7 +61,7 @@ def start_model():
 
 
 def get_score(model, passage: str, questions: List[str], answers: List[str]) -> List[float]:
-    model = fine_tune_model(model, passage)
+    # model = fine_tune_model(model, passage)
     correct_answers = get_extractions(model, passage, questions)
 
     score = []
