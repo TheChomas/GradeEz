@@ -11,6 +11,15 @@
       <h1>Error!</h1>
 
       <p>{{ error_message }}</p>
+
+      <br />
+
+      <button
+        type="button"
+        onclick="window.location.href=`{% url 'login_page' %}`"
+      >
+        Try again
+      </button>
     </div>
   </div>
 </div>

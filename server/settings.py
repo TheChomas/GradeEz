@@ -178,5 +178,5 @@ os.environ["SENTENCE_TRANSFORMERS_HOME"] = "./model/"
 APPEND_SLASH = False
 
 LOGIN_URL = 'login_page'
-LOGIN_REDIRECT_URL = 'test_page'
+LOGIN_REDIRECT_URL = 'quiz_page'
 LOGOUT_REDIRECT_URL = 'login_page'

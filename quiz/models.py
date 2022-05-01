@@ -35,9 +35,9 @@ class Answer(models.Model):
         return self.answer_text
 
 
-class Test(models.Model):
-    test_title = models.TextField(default="")
-    test_description = models.TextField(max_length=7000)
+class Quiz(models.Model):
+    quiz_title = models.TextField(default="")
+    quiz_description = models.TextField(max_length=7000)
 
     start_time = models.DateTimeField(default=datetime.now)
     end_time = models.DateTimeField(default=datetime_now_plus_minutes)
@@ -45,4 +45,4 @@ class Test(models.Model):
     passage = models.ManyToManyField(Passage)
 
     def __str__(self):
-        return self.test_title
+        return self.quiz_title

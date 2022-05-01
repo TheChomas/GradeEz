@@ -4,7 +4,7 @@ from typing import List
 from sentence_transformers import SentenceTransformer, InputExample, losses, util
 from torch.utils.data import DataLoader
 
-from api.models import Passage
+from quiz.models import Passage
 
 
 def get_extractions(model, passage: str, questions: List[str], k=2) -> List[str]:
