@@ -20,9 +20,19 @@ def login(request):
             auth_login(request, user)
             return HttpResponse("<h1>Logged in</h1>")
         else:
-            print("Error logging in")
+            cotext = {
+                "error_message": "Username or password is incorrect"
+            }
 
-    return render(request, 'users/login.html', {})
+            return render(request, 'users/login.html', context)
+
+    form = UserRegisterForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'users/login.html', context)
 
 
 def logout(request):
@@ -47,4 +57,10 @@ def register(request):
 
             return HttpResponse("<h1>Registered and logged in</h1>")
 
-    return render(request, 'users/register.html', {})
+    form = UserRegisterForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'users/register.html', context)
