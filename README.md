@@ -48,3 +48,7 @@ deactivate
 - Then the teacher can create a new test. This will create a unique test ID/number to identify the test. This will be used in the test link.
 - Students need to login with their accounts to be able to answer the test. When they do, they'll be shown the passage, questions in the test and will have the ability to fill and submit their answers. This will be stored in the DB and a score will be given by the AI model to each answer.
 - When creating a test a time limit may be set. If the student's time overflows, then the answers won't be accepted.
+
+## Metadata:
+
+- Colour of site: `#57b846`

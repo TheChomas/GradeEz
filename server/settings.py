@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'api',
     'users',
+    'quiz',
 
     'rest_framework',
     'corsheaders'
