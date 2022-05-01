@@ -4,6 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 from utils.datetime_utils import datetime_now_plus_minutes
+from utils import string_utils
 
 
 class Passage(models.Model):
@@ -11,7 +12,7 @@ class Passage(models.Model):
     passage_text = models.TextField(max_length=7000)
 
     def __str__(self):
-        return self.passage_text.split('.')[0]
+        return self.passage_title if not string_utils.is_blank(self.passage_title) else self.passage_text.split('.')[0]
 
 
 class Question(models.Model):
