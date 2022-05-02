@@ -27,4 +27,5 @@ urlpatterns = [
         {'document_root': settings.STATIC_ROOT}),
     path('api/', include('api.urls')),
     path('', include('users.urls')),
+    path('quiz/', include('quiz.urls')),
 ]
