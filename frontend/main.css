@@ -1,0 +1,44 @@
+.inner {
+    align-items: center;
+    padding: 4%;
+    margin-top: 5%;
+    color: white;
+    text-align: center;
+}
+
+.pass{
+    padding-top: 10%;
+    font-size: 20px;
+    text-align: justify;
+    color: white;
+}
+
+.question p {
+    padding-top: 15%;
+    font-size: 20px;
+    padding-left: 5%;
+    font-style: oblique;
+}
+
+.question h1{
+    font-style: oblique;
+    padding-left: 5%;
+}
+
+.answer {
+    padding-left: 5%;
+    padding-right: 3%;
+    padding-top: 5%;
+}
+
+textarea{
+    resize: none; 
+    
+}
+
+.sub {
+    padding-top: 10%;
+    float: right;
+    padding-right: 5%;
+}
+
