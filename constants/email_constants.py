@@ -1,4 +1,9 @@
 
+EMAIL_BODY_TEMPLATE = '''
+
+'''
+
+
 class EmailConstants:
     subject = ""
     body = ""

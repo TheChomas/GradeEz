@@ -31,6 +31,12 @@ This will now start a virtual environment. Next time you only need to start it, 
 python3 manage.py runserver
 ```
 
+- Run the scheduer which is used to send emails asynchronously in another termial parallely.
+
+```
+python3 manage.py process_tasks
+```
+
 This will start the server on port 8000. You can visit it at [localhost:8000](http://localhost:8000/).
 
 - After you're done, deactivate the virtual environment.

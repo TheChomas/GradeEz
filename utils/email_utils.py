@@ -1,8 +1,17 @@
+from re import sub
 from typing import List
 from django.core.mail import send_mail, send_mass_mail
+from background_task import background
 
 from server import settings
 from constants.email_constants import EmailConstants
+
+
+@background(schedule=1)
+def schedule_email(subject: str, body: str, to: str) -> None:
+    email = EmailConstants(subject, body, to)
+
+    send_email(email)
 
 
 def send_email(email_constants: EmailConstants) -> None:

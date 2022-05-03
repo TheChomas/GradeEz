@@ -4,5 +4,5 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='quiz_page'),
+    path('email/', views.home, name='send_email'),
 ]

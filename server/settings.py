@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'quiz',
 
+    'background_task',
     'rest_framework',
     'corsheaders'
 ]
@@ -140,11 +141,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_TZ = True
+
+USE_L10N = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -192,3 +196,6 @@ EMAIL_HOST_USER = config("EMAIL_USERNAME")
 EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
 
 EMAIL_USE_TLS = True
+
+# scheduler stuff
+BACKGROUND_TASK_RUN_ASYNC = True
