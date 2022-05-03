@@ -23,6 +23,8 @@ source venv/bin/activate
 ```
 This will now start a virtual environment. Next time you only need to start it, no need to create again.
 
+- Create a file called `.env` in the root directory (where `manage.py` is present) and fill it up with the API keys specified in `.env.sample` in the same directory.
+
 - Run the server.
 
 ```
