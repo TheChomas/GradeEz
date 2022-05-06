@@ -4,6 +4,7 @@
     margin-top: 5%;
     color: white;
     text-align: center;
+   
 }
 
 .pass{
@@ -11,6 +12,8 @@
     font-size: 20px;
     text-align: justify;
     color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .question p {
@@ -42,3 +45,10 @@ textarea{
     padding-right: 5%;
 }
 
+.countdown p{
+        display: inline;
+        font-size: 30px;
+        color: red;
+        position: relative;
+        right: -500px;
+}
