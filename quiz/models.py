@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 from utils.datetime_utils import datetime_now_plus_minutes
 from utils import string_utils
+from server import settings
 
 
 class Passage(models.Model):
@@ -45,4 +46,4 @@ class Quiz(models.Model):
     passage = models.ManyToManyField(Passage)
 
     def __str__(self):
-        return self.quiz_title
+        return settings.FORM_URL_TEMPLATE + str(self.id) + "/"

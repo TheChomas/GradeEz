@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     path('<int:quiz_id>/', views.home, name='home_page'),
     path('submit/<int:quiz_id>/', views.submit_quiz, name='submit_page'),
-    path('email/', views.send_email, name='send_email'),
+    # path('email/', views.send_email, name='send_email'),
 ]

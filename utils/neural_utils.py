@@ -53,7 +53,7 @@ def start_model():
 
     passages = [passage.passage_text for passage in passages]
 
-    model = fine_tune_model(model, '.'.join(passages), epochs=2)
+    # model = fine_tune_model(model, '.'.join(passages), epochs=2)
 
     print("Model loaded\n")
 

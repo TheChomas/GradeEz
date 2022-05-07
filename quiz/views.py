@@ -4,11 +4,13 @@ from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.utils.timezone import now as datetime_now
+from constants.neural_constants import NeuralConstants
 
 from utils import email_utils
 from constants.email_constants import EmailConstants
 from .models import Answer, Passage, Question, Quiz
 from .forms import AnswerForm, QuizCustomForm
+from .background import score_and_email
 
 # Create your views here.
 
@@ -73,15 +75,16 @@ def submit_quiz(request, quiz_id):
         data = dict(request.POST)
         data.pop("csrfmiddlewaretoken")
 
-        print("POST: ", data)
-
         question_answer_list = []
+        answers = []
 
         for key, value in data.items():
             try:
                 question = Question.objects.get(id=int(key))
             except Question.DoesNotExist:
                 raise Http404("Error in processing data.")
+
+            answers.append(value[0])
 
             answer = Answer(
                 answer_text=value[0], parent_question=question, author=user)
@@ -91,6 +94,18 @@ def submit_quiz(request, quiz_id):
             question_answer_list.append((question, answer))
 
         print(question_answer_list)
+
+        score_and_email(username=user.username,
+                        email=user.email,
+                        quiz_id=quiz_id,
+                        passage=passage.passage_text,
+                        questions=[
+                            question.question_text for question in questions],
+                        answers=answers,
+                        verbose_name=f"Emailing Score to user {user.email}",
+                        schedule=datetime.now())
+
+        print(f"Emailing scores to user {user.username}")
 
         # form = QuizCustomForm(request.POST, questions=questions)
 

@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.cache import cache_page
 
-from utils.neural import get_score, start_model
+from utils.neural_utils import get_score, start_model
 
 cache_timeout = 60
 
