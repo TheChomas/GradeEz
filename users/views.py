@@ -70,3 +70,15 @@ def register(request):
     }
 
     return render(request, 'users/register.html', context)
+
+
+def not_found_page(request, exception):
+    return render(request, 'users/404.html')
+
+
+def not_found_page_server(request):
+    return render(request, 'users/404.html')
+
+
+def thank_you(request):
+    return render(request, "users/thankyou.html")
