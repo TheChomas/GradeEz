@@ -7,24 +7,28 @@ from django.utils.timezone import now as datetime_now
 
 from utils import email_utils
 from constants.email_constants import EmailConstants
-from .models import Passage, Question, Quiz
+from .models import Answer, Passage, Question, Quiz
+from .forms import AnswerForm, QuizCustomForm
 
 # Create your views here.
 
 
 @login_required
 def home(request, quiz_id):
-    print(f"Quiz id: {quiz_id}")
-
     try:
         quiz = Quiz.objects.get(id=quiz_id)
     except Quiz.DoesNotExist:
         raise Http404("No Quizzes matches the given ID.")
 
+    user = request.user
+    print(f"Student ({user.username}) taking Quiz: ({quiz})")
+
     if quiz.end_time < datetime_now():
         raise Http404(
             "Test time is over. You cannot access the quiz at this moment.")
 
+    # try to keep multiple passages or change DB to make eaxh quiz hold
+    # only one passage
     try:
         passage = Passage.objects.get(quiz=quiz)
     except Passage.DoesNotExist:
@@ -39,9 +43,65 @@ def home(request, quiz_id):
         'end_date': quiz.end_time,
         'passage': passage,
         'quiz': quiz,
-        'questions': questions
+        'questions': questions,
+        'form': AnswerForm()
     }
     return render(request, "quiz/index.html", context)
+
+
+@login_required
+def submit_quiz(request, quiz_id):
+    if request.method == "POST":
+        try:
+            quiz = Quiz.objects.get(id=quiz_id)
+        except Quiz.DoesNotExist:
+            raise Http404("No Quizzes matches the given ID.")
+
+        try:
+            passage = Passage.objects.get(quiz=quiz)
+        except Passage.DoesNotExist:
+            raise Http404("No Passages were in the given Quiz.")
+
+        try:
+            questions = Question.objects.filter(parent_passage=passage)
+        except Question.DoesNotExist:
+            raise Http404("No Questions were in the given Passage.")
+
+        user = request.user
+        print(f"Student: {user.username} submitting Quiz: {quiz_id}")
+
+        data = dict(request.POST)
+        data.pop("csrfmiddlewaretoken")
+
+        print("POST: ", data)
+
+        question_answer_list = []
+
+        for key, value in data.items():
+            try:
+                question = Question.objects.get(id=int(key))
+            except Question.DoesNotExist:
+                raise Http404("Error in processing data.")
+
+            answer = Answer(
+                answer_text=value[0], parent_question=question, author=user)
+
+            answer.save()
+
+            question_answer_list.append((question, answer))
+
+        print(question_answer_list)
+
+        # form = QuizCustomForm(request.POST, questions=questions)
+
+        # print("Form not valid yet: ")
+        # if form.is_valid():
+        #     print("Form cleaned: ")
+        #     print(form.cleaned_data)
+
+        return render(request, "users/thankyou.html")
+    else:
+        return render(request, "users/404.html")
 
 
 def send_email(request):
