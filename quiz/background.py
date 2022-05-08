@@ -1,5 +1,8 @@
 from typing import List
 from background_task import background
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from constants.email_template_constants import EmailTemplate
 
 from utils import email_utils, neural_utils
 from constants.email_constants import EmailConstants
@@ -26,12 +29,32 @@ def score_and_email(quiz_id: int, username: str, email: str, passage: str, quest
     # parse and put scores in the email body
 
     print(f"Getting email ready...")
+
+    final_score = sum(
+        [1 if score > 0.4 else 0 for score in scores])
+
+    questions_to_send = []
+
+    for question, answer, score in zip(questions, answers, scores):
+        questions_to_send.append(EmailTemplate(
+            question, answer, round(score, 2)))
+
+    context = {
+        'username': username,
+        'final_score': final_score,
+        'questions': questions_to_send
+    }
+
+    html_message = render_to_string('quiz/email.html', context)
+    plain_message = strip_tags(html_message)
+
     email_obj = EmailConstants(
         subject=email_constants.EMAIL_SUBJECT + f" with ID {quiz_id}",
-        body=email_constants.format_email_template(
-            username=username,
-            scores=scores,
-            neural_obj=neural_obj),
+        # body=email_constants.format_email_template(
+        #     username=username,
+        #     scores=scores,
+        #     neural_obj=neural_obj),
+        body=plain_message,
         to=email)
 
-    email_utils.send_email(email_obj)
+    email_utils.send_email_html(email_obj, html_message)
