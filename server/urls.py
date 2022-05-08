@@ -29,3 +29,6 @@ urlpatterns = [
     path('', include('users.urls')),
     path('quiz/', include('quiz.urls')),
 ]
+
+handler404 = 'users.views.not_found_page'
+# handler500 = 'users.views.not_found_page_server'

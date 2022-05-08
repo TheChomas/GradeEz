@@ -166,7 +166,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
 ]
 
-APPEND_SLASH = True
+APPEND_SLASH = False
 
 CACHES = {
     'default': {
@@ -199,3 +199,5 @@ EMAIL_USE_TLS = True
 
 # scheduler stuff
 BACKGROUND_TASK_RUN_ASYNC = True
+
+FORM_URL_TEMPLATE = "http://localhost:8000/quiz/"

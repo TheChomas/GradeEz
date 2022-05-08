@@ -4,5 +4,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('email/', views.home, name='send_email'),
+    path('<int:quiz_id>/', views.home, name='home_page'),
+    path('submit/<int:quiz_id>/', views.submit_quiz, name='submit_page'),
+    # path('email/', views.send_email, name='send_email'),
 ]
