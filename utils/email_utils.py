@@ -26,6 +26,19 @@ def send_email(email_constants: EmailConstants) -> None:
     )
 
 
+def send_email_html(email_constants: EmailConstants, html: str) -> None:
+    print(f"Sending Email to {email_constants.to}")
+
+    send_mail(
+        email_constants.subject,
+        email_constants.body,
+        settings.EMAIL_HOST_USER,
+        [email_constants.to],
+        fail_silently=False,
+        html_message=html
+    )
+
+
 def send_mass_email(email_constants: List[EmailConstants]) -> None:
     messages = []
 
