@@ -181,10 +181,10 @@ CACHES = {
 
 os.environ["SENTENCE_TRANSFORMERS_HOME"] = "./model/"
 
-APPEND_SLASH = False
+APPEND_SLASH = True
 
 LOGIN_URL = 'login_page'
-LOGIN_REDIRECT_URL = 'quiz_page'
+LOGIN_REDIRECT_URL = 'home_page'
 LOGOUT_REDIRECT_URL = 'login_page'
 
 # Email stuff

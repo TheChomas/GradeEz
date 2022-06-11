@@ -3,6 +3,7 @@
 from typing import List
 from sentence_transformers import SentenceTransformer, InputExample, losses, util
 from torch.utils.data import DataLoader
+from decouple import config
 
 from quiz.models import Passage
 
@@ -46,8 +47,17 @@ def fine_tune_model(model, passage: str, epochs=1):
     return model
 
 
+def load_model():
+    if config("MODEL_ENABLE") == "FALSE":
+        print("Model not Loaded (disabled in .env)")
+        return None
+    else:
+        print("Transformer Model Loadeding...")
+        return SentenceTransformer('paraphrase-multilingual-mpnet-base-v2')
+
+
 def start_model():
-    model = SentenceTransformer('paraphrase-multilingual-mpnet-base-v2')
+    model = load_model()
 
     passages = Passage.objects.all()
 
@@ -55,7 +65,9 @@ def start_model():
 
     # model = fine_tune_model(model, '.'.join(passages), epochs=2)
 
-    print("Model loaded\n")
+    if model != None:
+        print("Model loading done", end="")
+    print("\n", end="")
 
     return model
 
