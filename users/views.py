@@ -18,7 +18,10 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
-            return HttpResponse("<h1>Logged in</h1>")
+            if request.POST['uri'] == "":
+                return HttpResponse("<h1>Logged in. Visit the quiz link to start the quiz.</h1>")
+            else:
+                return redirect(request.POST['uri'])
         else:
             context = {
                 "error_message": "Username or password is incorrect",
@@ -28,9 +31,16 @@ def login(request):
 
     form = UserRegisterForm()
 
+    nxt = request.GET.get("next", None)
+
     context = {
         'form': form,
     }
+
+    if nxt != None:
+        context['uri'] = nxt
+    else:
+        context['uri'] = ""
 
     return render(request, 'users/login.html', context)
 
@@ -51,11 +61,17 @@ def register(request):
             password = form.cleaned_data.get('password1')
             print(f'Account created for {username}!')
 
+            # return login(request)
+
             user = authenticate(request, username=username, password=password)
 
             auth_login(request, user)
 
-            return HttpResponse("<h1>Registered and logged in</h1>")
+            if request.POST['uri'] == "":
+                return HttpResponse("<h1>Registered and Logged in. Visit the quiz link to start the quiz.</h1>")
+            else:
+                return redirect(request.POST['uri'])
+
         else:
             context = {
                 "error_message": "Error registering a user."
@@ -65,9 +81,16 @@ def register(request):
 
     form = UserRegisterForm()
 
+    nxt = request.GET.get("next", None)
+
     context = {
         'form': form,
     }
+
+    if nxt != None:
+        context['uri'] = nxt
+    else:
+        context['uri'] = ""
 
     return render(request, 'users/register.html', context)
 

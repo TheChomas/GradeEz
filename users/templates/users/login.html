@@ -36,6 +36,7 @@
           {{ form.password1 }}
           <span class="focus-input100" data-placeholder="Password"></span>
         </div>
+        <input hidden type="text" name="uri" value="{{ uri }}" />
         <div class="container-login100-form-btn">
           <button class="login100-form-btn" type="submit">Login</button>
         </div>
@@ -46,7 +47,13 @@
                 </li> -->
           <li>
             <span class="txt1"> Don&apos;t have an account? </span>
-            <a href="{% url 'register_page' %}" class="txt2"> Sign up </a>
+            <a
+              href="{% url 'register_page' %}?next={{ uri }}"
+              id="signup-link"
+              class="txt2"
+            >
+              Sign up
+            </a>
           </li>
         </ul>
       </form>
