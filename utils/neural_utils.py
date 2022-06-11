@@ -48,7 +48,7 @@ def fine_tune_model(model, passage: str, epochs=1):
 
 
 def load_model():
-    if config("MODEL_ENABLE") == "FALSE":
+    if config("MODEL_ENABLE") and config("MODEL_ENABLE") == "FALSE":
         print("Model not Loaded (disabled in .env)")
         return None
     else:
