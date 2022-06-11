@@ -9,6 +9,5 @@
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "python.pythonPath": "/bin/python3.7"
+    }
 }
