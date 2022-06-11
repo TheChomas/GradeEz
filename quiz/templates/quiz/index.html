@@ -45,7 +45,9 @@
               <p id="secs"></p>
             </div>
             <form method="POST" action="/quiz/submit/{{ quiz.id }}/">
-              {% csrf_token %} {% for question in questions %}
+              {% csrf_token %}
+              <!-- List of qustions -->
+              {% for question in questions %}
               <div class="question">
                 <!-- <p>1 of 5 answered</p> -->
                 <h1>{{ forloop.counter }}. {{ question.question_text }}</h1>
