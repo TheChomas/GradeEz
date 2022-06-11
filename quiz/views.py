@@ -48,6 +48,7 @@ def home(request, quiz_id):
         'questions': questions,
         'form': AnswerForm()
     }
+    print(quiz.end_time)
     return render(request, "quiz/index.html", context)
 
 
