@@ -66,7 +66,9 @@
                 </li> -->
           <li>
             <span class="txt1"> Already have an account? </span>
-            <a href="{% url 'login_page' %}" class="txt2"> Sign in </a>
+            <a href="{% url 'login_page' %}?next={{ uri }}" class="txt2">
+              Sign in
+            </a>
           </li>
         </ul>
       </form>
