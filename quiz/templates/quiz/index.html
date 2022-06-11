@@ -38,16 +38,14 @@
             </div>
           </div>
           <div class="col-sm-6" style="background-color: rgb(250, 250, 250)">
+            <div class="countdown">
+              <p id="days"></p>
+              <p id="hours"></p>
+              <p id="mins"></p>
+              <p id="secs"></p>
+            </div>
             <form method="POST" action="/quiz/submit/{{ quiz.id }}/">
-              {% csrf_token %}
-              <div class="countdown">
-                <p id="days"></p>
-                <p id="hours"></p>
-                <p id="mins"></p>
-                <p id="secs"></p>
-              </div>
-
-              {% for question in questions %}
+              {% csrf_token %} {% for question in questions %}
               <div class="question">
                 <!-- <p>1 of 5 answered</p> -->
                 <h1>{{ forloop.counter }}. {{ question.question_text }}</h1>
