@@ -29,7 +29,7 @@ def home(request, quiz_id):
 
     if quiz in quizzes:
         raise Http404(
-            "You seemed to have already taken this quiz. If this is a mistake please contact your faculty.")
+            "You seemed to have already taken this quiz. If this is a mistake please contact your faculty")
 
     if quiz.end_time < datetime_now():
         raise Http404(

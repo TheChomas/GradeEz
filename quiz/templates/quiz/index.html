@@ -376,6 +376,12 @@
         $(".md-close").on("click", function () {
           $(".md-modal").removeClass("md-show");
         });
+
+        $(document).on("keyup", function (e) {
+          if (e.key == "Escape") {
+            $(".md-modal").removeClass("md-show");
+          }
+        });
       });
     </script>
   </body>

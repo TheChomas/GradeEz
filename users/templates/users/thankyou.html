@@ -1,81 +1,57 @@
 {% load static %}
 
-<html>
-  <head>
-    <style>
-      .thankyou-wrapper {
-        width: 100%;
-        height: auto;
-        margin: auto;
-        background: #ffffff;
-        padding: 10px 0px 50px;
-      }
-      .thankyou-wrapper h1 {
-        font: 100px Arial, Helvetica, sans-serif;
-        text-align: center;
-        color: #333333;
-        padding: 0px 10px 10px;
-      }
-      .thankyou-wrapper p {
-        font: 26px Arial, Helvetica, sans-serif;
-        text-align: center;
-        color: #333333;
-        padding: 5px 10px 10px;
-      }
-      .thankyou-wrapper a {
-        font: 26px Arial, Helvetica, sans-serif;
-        text-align: center;
-        color: #ffffff;
-        display: block;
-        text-decoration: none;
-        width: 250px;
-        background: #15c01e;
-        margin: 10px auto 0px;
-        padding: 15px 20px 15px;
-        border-bottom: 5px solid #15c01e;
-      }
-      .thankyou-wrapper a:hover {
-        font: 26px Arial, Helvetica, sans-serif;
-        text-align: center;
-        color: #ffffff;
-        display: block;
-        text-decoration: none;
-        width: 250px;
-        background: #15c01e;
-        margin: 10px auto 0px;
-        padding: 15px 20px 15px;
-        border-bottom: 5px solid #15c01e;
-      }
-    </style>
-  </head>
-  <body>
-    <section class="login-main-wrapper">
-      <div class="main-container">
-        <div class="login-process">
-          <div class="login-main-container">
-            <div class="thankyou-wrapper">
-              <h1>
-                <img
-                  src="{% static 'users/thankyou.png' %}"
-                  alt="thanks"
-                  height="350px"
-                />
-              </h1>
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>GradeEz | Thank you</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        rel="stylesheet"
+        href="{% static 'api/assets/css/bootstrap.min.css' %}"
+      />
+      <link
+        rel="stylesheet"
+        href="{% static 'api/assets/css/fontawesome-all.css' %}"
+      />
+      <link rel="stylesheet" href="{% static 'api/assets/css/style.css' %}" />
+    </head>
+    <body>
+      <!-- Start of thank you section
+		============================================= -->
+      <section id="thank-you" class="thank-you-section">
+        <div class="container">
+          <div
+            class="thank-you-wrapper position-relative thank-wrapper-style-one"
+          >
+            <!-- <div class="thank-you-close text-center">x</div> -->
+            <div class="thank-txt text-center">
+              <div class="thank-icon">
+                <img src="{% static 'api/assets/img/tht5.png' %}" alt="" />
+              </div>
+              <h1>Thank you for using GradeEz!</h1>
               <p>
-                You will be notifed of your scores by email.
-                <br />
-                We will send an email to the email you used when you signed into
-                this account.
+                You&apos;ll receive an email about your test scores as soon as
+                our AI finishes evaulating your answers. If you have any
+                discrepencies you can get in touch of the faculty who set this
+                quiz.
               </p>
-              <br />
-              <a href="{% url 'logout_page' %}">Logout</a>
-              <div class="clr"></div>
+              <a
+                class="d-block text-center text-uppercase"
+                href="{% url 'logout_page' %}"
+                >Logout</a
+              >
             </div>
-            <div class="clr"></div>
           </div>
         </div>
-        <div class="clr"></div>
-      </div>
-    </section>
-  </body>
+      </section>
+      <!-- End of thank you section
+ 		============================================= -->
+
+      <script src="{% static 'api/assets/js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'api/assets/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'api/assets/js/main.js' %}"></script>
+    </body>
+  </html>
 </html>
