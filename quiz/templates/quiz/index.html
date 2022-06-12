@@ -1,96 +1,223 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>GradeEz</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>GradeEz | Quiz</title>
+
+    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto"
+      href="{% static 'quiz/assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- External Css -->
+    <link
+      rel="stylesheet"
+      href="{% static 'quiz/assets/css/line-awesome.min.css' %}"
     />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      href="{% static 'quiz/assets/css/owl.carousel.min.css' %}"
+    />
+
+    <!-- Custom Css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'quiz/css/main.css' %}"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      media="screen"
-      href="{% static 'quiz/main.css' %}"
+      href="{% static 'quiz/css/job-1.css' %}"
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'quiz/../images/favicon.png' %}" />
+    <link
+      rel="apple-touch-icon"
+      href="{% static 'quiz/../images/apple-touch-icon.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="{% static 'quiz/../images/icon-72x72.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="{% static 'quiz/../images/icon-114x114.png' %}"
     />
     <script>
       let questionIds = [];
     </script>
+    <style>
+      .scroll {
+        margin: 4px, 4px;
+        padding: 4px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align: justify;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <div class="container-fluid">
-        <div class="row" style="height: 100vh">
-          <div class="col-sm-6" style="background-color: #57b846">
-            <div class="inner">
-              <h1>Passage: {{ passage.passage_title }}</h1>
-              <div class="pass">
-                <p>{{ passage.passage_text }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6" style="background-color: rgb(250, 250, 250)">
-            <div class="countdown">
-              <p id="days"></p>
-              <p id="hours"></p>
-              <p id="mins"></p>
-              <p id="secs"></p>
-            </div>
-            <form method="POST" action="/quiz/submit/{{ quiz.id }}/">
-              {% csrf_token %}
-              <!-- List of qustions -->
-              {% for question in questions %}
-              <div class="question">
-                <!-- <p>1 of 5 answered</p> -->
-                <h1>{{ forloop.counter }}. {{ question.question_text }}</h1>
-              </div>
-              <div class="answer">
-                <div class="form-group">
-                  <textarea
-                    class="form-control"
-                    style="background-color: rgb(223, 223, 223)"
-                    placeholder="Write your answer"
-                    id="exampleFormControlTextarea_{{ question.id }}"
-                    name="{{ question.id }}"
-                    rows="3"
-                  ></textarea>
-                  <!-- Parent question -->
-                  <!-- {form.parent_question.as_hidden }} -->
-                  <!-- answer -->
+    <div class="ugf-wrapper">
+      <div class="logo">
+        <img
+          src="{% static 'quiz/logo.png' %}"
+          class="img-fluid logo-white"
+          height="70"
+          width="70"
+          alt="logo"
+        />
+        <!-- dark logo -->
+        <img
+          src="{% static 'quiz/logo.png' %}"
+          class="img-fluid logo-black"
+          height="70"
+          width="70"
+          alt="logo"
+        />
+      </div>
+      <div class="ugf-content-block">
+        <div class="content-block">
+          <h1>{{ passage.passage_title }}</h1>
+          <p>{{ passage.passage_text }}</p>
+        </div>
+      </div>
+      <div class="container scroll" style="overflow-y: auto; height: 100vh">
+        <div class="row">
+          <div class="col-lg-5 offset-lg-7">
+            <div class="ufg-job-application-wrapper pt150">
+              <div class="progress">
+                <div class="progress-bar">
+                  <span class="step-text"
+                    >Time remaining:
+                    <span id="days"></span>
+                    <span id="hours"></span>
+                    <span id="mins"></span>
+                    <span id="secs"></span>
+                  </span>
                 </div>
               </div>
-              <script>
-                questionIds.push("{{ question.id }}");
-              </script>
-              {% endfor %}
-              <div class="sub">
-                <!-- <button type="button" class="btn btn-secondary">
-                  Previous Question
-                </button>
-                <button type="button" class="btn btn-success">
-                  Next Question
-                </button> -->
-                <button
-                  onclick="alert('submitted')"
-                  type="submit"
-                  class="btn btn-warning"
+              <div class="form-steps active">
+                <h3>Answer the following questions</h3>
+                <form
+                  method="POST"
+                  action="/quiz/submit/{{ quiz.id }}/"
+                  class="job-application-form"
                 >
-                  Submit
-                </button>
+                  {% csrf_token %}
+                  <!-- List of qustions -->
+                  {% for question in questions %}
+                  <h4>{{ forloop.counter }}. {{ question.question_text }}</h4>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleFormControlTextarea_{{ question.id }}"
+                      name="{{ question.id }}"
+                      required
+                    />
+                    <label for="input-text">Your answer</label>
+                  </div>
+                  <script>
+                    questionIds.push("{{ question.id }}");
+                  </script>
+                  {% endfor %}
+                  <!-- <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-mail"
+                      required
+                    />
+                    <label for="input-mail">Email Addresss</label>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-pass"
+                      required
+                    />
+                    <label for="input-pass">Phone</label>
+                  </div>
+                  <div class="form-group check-gender">
+                    <span class="lebel-text">Select Gender</span>
+                    <div class="custom-radio">
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="custom-control-input"
+                        id="male"
+                        required
+                      />
+                      <label class="custom-control-label" for="male"
+                        >Male</label
+                      >
+                    </div>
+                    <div class="custom-radio">
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="custom-control-input"
+                        id="female"
+                        required
+                      />
+                      <label class="custom-control-label" for="female"
+                        >Female</label
+                      >
+                    </div>
+                  </div> -->
+                  <button
+                    onclick="alert('submitted')"
+                    type="submit"
+                    class="btn"
+                  >
+                    Submit
+                  </button>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
+      <!-- <div class="footer">
+        <div class="social-links">
+          <a href="#"><i class="lab la-facebook-f"></i></a>
+          <a href="#"><i class="lab la-twitter"></i></a>
+          <a href="#"><i class="lab la-linkedin-in"></i></a>
+          <a href="#"><i class="lab la-instagram"></i></a>
+        </div>
+        <div class="copyright">
+          <p>Copyright © 2021 Anfra. All Rights Reserved</p>
+        </div>
+      </div> -->
     </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'quiz/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'quiz/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'quiz/assets/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'quiz/js/custom.js' %}"></script>
     <script>
       var time = "{{ end_date }}".slice(15);
       var date = "{{ end_date }}".slice(0, 15);

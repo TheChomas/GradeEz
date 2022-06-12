@@ -1,77 +1,159 @@
-<!-- extend base template -->
-{% extends "users/base/base.html" %}
-<!-- load static data -->
 {% load static %}
 
-<!-- start block  -->
-{% block content %}
-<div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login100 p-t-85 p-b-20">
-      <form
-        class="login100-form validate-form"
-        method="POST"
-        action="/login/"
-        name="loginForm"
-        id="loginForm"
-      >
-        {% csrf_token %}
-        <span class="login100-form-title p-b-70"> Login </span>
-        <span class="login100-form-avatar">
-          <img src="{% static 'users/images/avatar-01.jpg' %}" alt="AVATAR" />
-        </span>
-        <div
-          class="wrap-input100 validate-input m-t-85 m-b-35"
-          data-validate="Enter username"
-        >
-          <!-- <input class="input100" type="text" name="username" /> -->
-          {{ form.username }}
-          <span class="focus-input100" data-placeholder="Username"></span>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>GradeEz | login</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'users/assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- External Css -->
+    <link
+      rel="stylesheet"
+      href="{% static 'users/assets/css/line-awesome.min.css' %}"
+    />
+
+    <!-- Custom Css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'users/css/main.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'users/css/theme-1.css' %}"
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'users/../images/favicon.png' %}" />
+    <link
+      rel="apple-touch-icon"
+      href="{% static 'users/../images/apple-touch-icon.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="{% static 'users/../images/icon-72x72.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="{% static 'users/../images/icon-114x114.png' %}"
+    />
+  </head>
+  <body>
+    <div class="ugf-main-wrap ugf-bg">
+      <div class="ugf-header">
+        <div class="logo">
+          <a href="#"
+            ><img
+              src="{% static 'quiz/logo.png' %}"
+              height="50"
+              width="50"
+              class="img-fluid"
+              alt="logo"
+          /></a>
         </div>
-        <div
-          class="wrap-input100 validate-input m-b-50"
-          data-validate="Enter password"
-        >
-          <!-- <input class="input100" type="password" name="pass" /> -->
-          {{ form.password1 }}
-          <span class="focus-input100" data-placeholder="Password"></span>
+        <div class="alternet-access">
+          <p>
+            Don't have an account?
+            <a href="{% url 'register_page' %}?next={{ uri }}">Register now!</a>
+          </p>
         </div>
-        <input hidden type="text" name="uri" value="{{ uri }}" />
-        <div class="container-login100-form-btn">
-          <button class="login100-form-btn" type="submit">Login</button>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="ugf-container pt200">
+              <div class="content-wrap">
+                <div class="ugf-form-block-header">
+                  <h1>Welcome Back!</h1>
+                  <p>
+                    Enter your username and password to login to your account
+                  </p>
+                </div>
+                <div class="ugf-input-block">
+                  <form method="POST" action="/login/">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <!-- <input
+                        type="email"
+                        class="form-control"
+                        id="inputMail"
+                        placeholder="Email Address"
+                      /> -->
+                      {{ form.username }}
+                    </div>
+                    <div class="form-group pass-block">
+                      <!-- <input
+                        type="password"
+                        class="form-control"
+                        id="inputPass"
+                        placeholder="Password"
+                      /> -->
+                      {{ form.password1 }}
+                    </div>
+                    <input hidden type="text" name="uri" value="{{ uri }}" />
+                    <button type="submit" class="btn">Login Account</button>
+                    <!-- <a href="forget.html" class="forget-pass"
+                      >Forget Password?</a
+                    > -->
+                  </form>
+                </div>
+                <!-- <div class="ugf-block-separator">
+                  <p>Or</p>
+                </div> -->
+                <div class="alternet-access">
+                  <p>
+                    Don't have an account?
+                    <a href="{% url 'register_page' %}?next={{ uri }}"
+                      >Register now!</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul class="login-more p-t-190">
-          <!-- <li class="m-b-8">
-                  <span class="txt1"> Forgot </span>
-                  <a href="#" class="txt2"> Username / Password? </a>
-                </li> -->
-          <li>
-            <span class="txt1"> Don&apos;t have an account? </span>
-            <a
-              href="{% url 'register_page' %}?next={{ uri }}"
-              id="signup-link"
-              class="txt2"
-            >
-              Sign up
-            </a>
-          </li>
-        </ul>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
-<div id="dropDownSelect1"></div>
 
-<script>
-  let username = document.getElementById("id_username");
-  let password = document.getElementById("id_password1");
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'users/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'users/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'users/assets/js/bootstrap.min.js' %}"></script>
 
-  // username.placeholder = "Username";
-  username.className = "input100";
+    <script src="{% static 'users/js/custom.js' %}"></script>
+    <script>
+      let username = document.getElementById("id_username");
+      let password = document.getElementById("id_password1");
 
-  // password.placeholder = "Password";
-  password.className = "input100";
-</script>
+      // username.placeholder = "Username";
+      username.className = "form-control";
+      username.placeholder = "Username";
 
-<!-- end block -->
-{% endblock content %}
+      // password.placeholder = "Password";
+      password.className = "form-control";
+      password.placeholder = "Password";
+    </script>
+  </body>
+</html>

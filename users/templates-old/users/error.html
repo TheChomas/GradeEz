@@ -1,0 +1,29 @@
+<!-- extend base template -->
+{% extends "users/base/base.html" %}
+<!-- load static data -->
+{% load static %}
+
+<!-- start block  -->
+{% block content %}
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-t-85 p-b-20">
+      <h1>Error!</h1>
+
+      <p>{{ error_message }}</p>
+
+      <br />
+
+      <button
+        type="button"
+        onclick="window.location.href=`{% url 'login_page' %}`"
+      >
+        Try again
+      </button>
+    </div>
+  </div>
+</div>
+<div id="dropDownSelect1"></div>
+
+<!-- end block -->
+{% endblock content %}

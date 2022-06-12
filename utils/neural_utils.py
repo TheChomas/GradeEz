@@ -52,7 +52,7 @@ def load_model():
         print("Model not Loaded (disabled in .env)")
         return None
     else:
-        print("Transformer Model Loadeding...")
+        print("Transformer Model Loading...")
         return SentenceTransformer('paraphrase-multilingual-mpnet-base-v2')
 
 
