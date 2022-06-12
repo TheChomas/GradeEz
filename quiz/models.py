@@ -45,5 +45,7 @@ class Quiz(models.Model):
 
     passage = models.ManyToManyField(Passage)
 
+    students = models.ManyToManyField(User)
+
     def __str__(self):
         return settings.FORM_URL_TEMPLATE + str(self.id) + "/"

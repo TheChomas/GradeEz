@@ -25,6 +25,12 @@ def home(request, quiz_id):
     user = request.user
     print(f"Student ({user.username}) taking Quiz: ({quiz})")
 
+    quizzes = user.quiz_set.all()
+
+    if quiz in quizzes:
+        raise Http404(
+            "You seemed to have already taken this quiz. If this is a mistake please contact your faculty.")
+
     if quiz.end_time < datetime_now():
         raise Http404(
             "Test time is over. You cannot access the quiz at this moment.")
@@ -90,6 +96,9 @@ def submit_quiz(request, quiz_id):
                 answer_text=value[0], parent_question=question, author=user)
 
             answer.save()
+
+            # adding the students to the quiz list
+            quiz.students.add(user)
 
             question_answer_list.append((question, answer))
 
