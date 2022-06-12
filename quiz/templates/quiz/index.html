@@ -73,6 +73,87 @@
         overflow-y: auto;
         text-align: justify;
       }
+
+      .md-modal {
+        margin: auto;
+        position: fixed;
+        top: 100px;
+        left: 0;
+        right: 0;
+        width: 50%;
+        max-width: 630px;
+        min-width: 320px;
+        height: auto;
+        z-index: 2000;
+        visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+
+      .md-show {
+        visibility: visible;
+      }
+
+      .md-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        opacity: 0;
+        background: rgba(228, 240, 227, 0.8);
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      .md-show ~ .md-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .md-effect-12 .md-content {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      .md-show.md-effect-12 ~ .md-overlay {
+        background-color: #e4f0e3;
+      }
+
+      .md-effect-12 .md-content h3,
+      .md-effect-12 .md-content {
+        background: transparent;
+      }
+
+      .md-show.md-effect-12 .md-content {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      .md-button {
+        display: block;
+        margin: 5% auto 0;
+        background: transparent;
+        border: 2px solid #444;
+        padding: 5px 10px;
+      }
+
+      .md-close {
+        margin-top: 40px;
+      }
     </style>
   </head>
   <body>
@@ -140,51 +221,7 @@
                     questionIds.push("{{ question.id }}");
                   </script>
                   {% endfor %}
-                  <!-- <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="input-mail"
-                      required
-                    />
-                    <label for="input-mail">Email Addresss</label>
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="input-pass"
-                      required
-                    />
-                    <label for="input-pass">Phone</label>
-                  </div>
-                  <div class="form-group check-gender">
-                    <span class="lebel-text">Select Gender</span>
-                    <div class="custom-radio">
-                      <input
-                        type="radio"
-                        name="gender"
-                        class="custom-control-input"
-                        id="male"
-                        required
-                      />
-                      <label class="custom-control-label" for="male"
-                        >Male</label
-                      >
-                    </div>
-                    <div class="custom-radio">
-                      <input
-                        type="radio"
-                        name="gender"
-                        class="custom-control-input"
-                        id="female"
-                        required
-                      />
-                      <label class="custom-control-label" for="female"
-                        >Female</label
-                      >
-                    </div>
-                  </div> -->
+
                   <button
                     onclick="alert('submitted')"
                     type="submit"
@@ -210,6 +247,45 @@
         </div>
       </div> -->
     </div>
+
+    <!-- Instructions modal -->
+    <div class="md-modal md-effect-12">
+      <div class="md-content">
+        <h3>Instructions:</h3>
+        <div>
+          <h4>Welcome to GradeEz automated tests and scoring!</h4>
+          <p>
+            This is an automated test. You are supposed to type the answers in
+            the inputs as instructed.
+          </p>
+          <ol>
+            <li>
+              Answer all the questions provided. All questions are compulsory.
+            </li>
+            <li>
+              Answer the questions in full words and full sentences. This test
+              will be corrected by an AI, so please be exact with contextual
+              meaning.
+            </li>
+            <li>
+              Timer will be shown in the right side above the questions. Submit
+              the quiz before the timer runs out. You will not be able to submit
+              after the time ends.
+            </li>
+            <li>
+              Your scores will be sent shortly after to your registered email.
+              If you have any discrepancies please get in touch with your
+              faculty responsible for this quiz.
+            </li>
+          </ol>
+          <button class="md-button md-close">
+            I have understood and<br />am ready to take the test!
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="md-overlay"></div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -289,6 +365,18 @@
       for (let i = 0; i < questions.length; i++) {
         questions[i].value = parseInt(questionIds[i]);
       }
+    </script>
+    <script>
+      $(function () {
+        // $('.md-trigger').on('click', function() {
+        //   $('.md-modal').addClass('md-show');
+        // });
+        $(".md-modal").addClass("md-show");
+
+        $(".md-close").on("click", function () {
+          $(".md-modal").removeClass("md-show");
+        });
+      });
     </script>
   </body>
 </html>
