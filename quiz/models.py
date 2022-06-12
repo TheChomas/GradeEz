@@ -33,7 +33,7 @@ class Answer(models.Model):
     score = models.IntegerField(default=-1)
 
     def __str__(self):
-        return self.answer_text
+        return self.author.username + ": " + self.answer_text
 
 
 class Quiz(models.Model):
@@ -45,7 +45,7 @@ class Quiz(models.Model):
 
     passage = models.ManyToManyField(Passage)
 
-    students = models.ManyToManyField(User)
+    students = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return settings.FORM_URL_TEMPLATE + str(self.id) + "/"
