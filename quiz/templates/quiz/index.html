@@ -186,7 +186,13 @@
           <div class="col-lg-5 offset-lg-7">
             <div class="ufg-job-application-wrapper pt150">
               <div class="progress">
-                <div class="progress-bar">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="100"
+                  aria-valuemax="100"
+                >
                   <span class="step-text"
                     >Time remaining:
                     <span id="days"></span>
@@ -293,7 +299,7 @@
     <script src="{% static 'quiz/assets/js/popper.min.js' %}"></script>
     <script src="{% static 'quiz/assets/js/bootstrap.min.js' %}"></script>
 
-    <script src="{% static 'quiz/js/custom.js' %}"></script>
+    <!-- <script src="{% static 'quiz/js/custom.js' %}"></script> -->
     <script>
       var time = "{{ end_date }}".slice(15);
       var date = "{{ end_date }}".slice(0, 15);
