@@ -14,7 +14,7 @@ Backend built with Django complete with caching, rate limiting, etc.
   
 ```
 python3 -m venv venv
-# you can just use 'python' instead of 'python3' instead
+# you can just use 'python' instead of 'python3'
 ```
 - Start the virtual environment.
   
