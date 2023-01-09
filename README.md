@@ -1,4 +1,4 @@
-# GradeEz Backend
+# GradeEz
 
 Backend built with Django complete with caching, rate limiting, etc.
 
@@ -6,33 +6,42 @@ Backend built with Django complete with caching, rate limiting, etc.
 
 - Python version `3.7`. I am personally running `3.7.13`
 - `pip` installed compatible with the same python version as above.
+- `venv` package will be run when creating virtual environments. If not, you will need to install it.
 
-## To run:
+## How to run:
 
 - Clone this repo.
+```
+git clone https://github.com/TheChomas/GradeEz.git
+```
+
 - Create a virtual environment.
-  
 ```
 python3 -m venv venv
 # you can just use 'python' instead of 'python3'
 ```
+
 - Start the virtual environment.
   
 ```
 source venv/bin/activate
 ```
-This will now start a virtual environment. Next time you only need to start it, no need to create again.
+This will now open a virtual environment. Next time you only need to start it, no need to create again.
 
-- Create a file called `.env` in the root directory (where `manage.py` is present) and fill it up with the API keys specified in `.env.sample` in the same directory.
+- Install the dependencies required.
+```
+pip3 install -r requirements.txt
+# alternatively you can only use 'pip' instead of 'pip3'
+```
+
+- Create a file called `.env` in the root directory (where `manage.py` is present) and fill it up with the API keys specified in `.env.sample` in the same directory. 
 
 - Run the server.
-
 ```
 python3 manage.py runserver
 ```
 
 - Run the scheduer which is used to send emails asynchronously in another termial parallely.
-
 ```
 python3 manage.py process_tasks
 ```
@@ -48,7 +57,7 @@ deactivate
 ## Notes:
 
 - The model will be downloaded the first time you run the server. After that it will be saved in the `model/` directory. The size is about 1.2 GB.
-- The `api/` directory is for the JSON response. For normal templates, use other apps instead.
+- The `api/` directory is for the JSON response, which is deprecated. For normal templates, use other apps instead.
 
 ### The aim of the project / how it is supposed to work
 
