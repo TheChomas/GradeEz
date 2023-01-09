@@ -21,11 +21,16 @@ python3 -m venv venv
 # you can just use 'python' instead of 'python3'
 ```
 
-- Start the virtual environment.
+- Start the virtual environment (Unix or macos).
   
 ```
 source venv/bin/activate
 ```
+If you are using windows, then run
+```
+venv\Scripts\activate.bat
+```
+
 This will now open a virtual environment. Next time you only need to start it, no need to create again.
 
 - Install the dependencies required.
